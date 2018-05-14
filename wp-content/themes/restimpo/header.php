@@ -24,39 +24,27 @@
  
 <body <?php body_class(); ?> id="wrapper"> 
 <header id="wrapper-header">
-<?php if ( !is_page_template('template-landing-page.php') ) { ?>
-<?php //if ( has_nav_menu( 'top-navigation' ) || get_theme_mod('restimpo_header_facebook_link', restimpo_default_options('restimpo_header_facebook_link')) != '' || get_theme_mod('restimpo_header_twitter_link', restimpo_default_options('restimpo_header_twitter_link')) != '' || get_theme_mod('restimpo_header_google_link', restimpo_default_options('restimpo_header_google_link')) != '' || get_theme_mod('restimpo_header_rss_link', restimpo_default_options('restimpo_header_rss_link')) != '' ) {  ?>
-
-<?php } ?>
-
-<?php if ( is_home() || is_front_page() ) { ?> 
-<?php if ( get_header_image() != '' ) { ?> 
   <div class="header-image">
     <img class="header-img" src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?>" />
     <div class="header-image-container">
-    <div class="header-image-text-wrapper">
-      <div class="header-image-text">
-<?php if ( get_theme_mod('restimpo_header_image_headline', restimpo_default_options('restimpo_header_image_headline')) != '' ) { ?>
-        <p class="header-image-headline"><?php echo esc_attr(get_theme_mod('restimpo_header_image_headline', restimpo_default_options('restimpo_header_image_headline'))); ?></p>
-<?php } if ( get_theme_mod('restimpo_header_image_text', restimpo_default_options('restimpo_header_image_text')) != '' ) { ?>
-        <p class="header-image-info"><?php echo esc_attr(get_theme_mod('restimpo_header_image_text', restimpo_default_options('restimpo_header_image_text'))); ?></p>
-<?php } if ( get_theme_mod('restimpo_header_image_link_url', restimpo_default_options('restimpo_header_image_link_url')) != '' || get_theme_mod('restimpo_header_image_link_text', restimpo_default_options('restimpo_header_image_link_text')) != '' ) { ?>
-        <a class="header-image-link" href="<?php echo esc_url(get_theme_mod('restimpo_header_image_link_url', restimpo_default_options('restimpo_header_image_link_url'))); ?>"><span><?php echo esc_attr(get_theme_mod('restimpo_header_image_link_text', restimpo_default_options('restimpo_header_image_link_text'))); ?></span></a>
-<?php } ?>
+      <div class="header-image-text-wrapper">
+        <div class="header-image-text">
+          <?php if ( get_theme_mod('restimpo_header_image_headline', restimpo_default_options('restimpo_header_image_headline')) != '' ) { ?>
+                  <p class="header-image-headline"><?php echo esc_attr(get_theme_mod('restimpo_header_image_headline', restimpo_default_options('restimpo_header_image_headline'))); ?></p>
+          <?php } if ( get_theme_mod('restimpo_header_image_text', restimpo_default_options('restimpo_header_image_text')) != '' ) { ?>
+                  <p class="header-image-info"><?php echo esc_attr(get_theme_mod('restimpo_header_image_text', restimpo_default_options('restimpo_header_image_text'))); ?></p>
+          <?php } if ( get_theme_mod('restimpo_header_image_link_url', restimpo_default_options('restimpo_header_image_link_url')) != '' || get_theme_mod('restimpo_header_image_link_text', restimpo_default_options('restimpo_header_image_link_text')) != '' ) { ?>
+                  <a class="header-image-link" href="<?php echo esc_url(get_theme_mod('restimpo_header_image_link_url', restimpo_default_options('restimpo_header_image_link_url'))); ?>"><span><?php echo esc_attr(get_theme_mod('restimpo_header_image_link_text', restimpo_default_options('restimpo_header_image_link_text'))); ?></span></a>
+          <?php } ?>
+        </div>
       </div>
     </div>
-    </div>
   </div>
-<?php }} else { ?>
-<?php if ( get_theme_mod('restimpo_display_header_image', restimpo_default_options('restimpo_display_header_image')) == 'Everywhere' && get_header_image() != '' ) { ?>
-  <div class="header-image">
-    <img class="header-img" src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?>" />
-  </div>
-<?php }} ?>
-<?php if ( is_home() && get_theme_mod('restimpo_display_site_description', restimpo_default_options('restimpo_display_site_description')) != 'Hide' ) { ?>  
+<?php if (get_theme_mod('restimpo_display_site_description', restimpo_default_options('restimpo_display_site_description')) != 'Hide' ) { ?>  
   <div class="header-description-wrapper">
     <div class="header-description">
-    <?php wp_nav_menu( array( 'menu_id'=>'top-nav', 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
+    <?php
+      wp_nav_menu( array( 'menu_id'=>'top-nav', 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?>
     </div>
   </div>
 <?php } ?>

@@ -110,7 +110,8 @@ function restimpo_register_my_menus() {
   register_nav_menus(
     array(
       'main-navigation' => __( 'Main Header Menu', 'restimpo' ),
-      'top-navigation' => __( 'Top Header Menu', 'restimpo' )
+			'top-navigation' => __( 'Top Header Menu', 'restimpo' ),
+			'primary' => __( 'Primary Menu', 'restimpo' )
     )
   );
 }
@@ -346,6 +347,96 @@ function restimpo_filter_menu_class( $objects, $args ) {
         $objects[$i]->classes[] = 'last-menu-item';
  
     return $objects; 
+}
+
+add_filter( 'wp_nav_menu_items', 'maple_custom_menu_filter', 10, 2 );
+function maple_custom_menu_filter( $items, $args ) {
+    /**
+     * If menu primary menu is set.
+     */
+    if ( $args->theme_location == 'primary' ) {
+        $home = '<li class="menu-item"><a href="' . esc_url( get_home_url( '/' ) ) . '" title="'.esc_attr( get_bloginfo( 'name', 'display' ) ).'">Trang chủ</a></li>';
+        $items = $home . $items;
+    }
+
+    return $items;
+}
+
+if ( ! function_exists( 'bcdonline_breadcrumbs' ) ) {
+	/**
+	 * Prints HTML.
+	 */
+	function bcdonline_breadcrumbs() {
+		$delimiter = '';
+		$name = 'Trang chủ'; //text for the 'Home' link
+		$currentBefore = '<span class="current">';
+		$currentAfter = '</span>';
+
+		global $post;
+		$home = get_bloginfo('url');
+		
+		if(is_home() && get_query_var('paged') == 0) 
+						echo '<span class="home">' . $name . '</span>';
+		else
+						echo '<a class="home" href="' . $home . '">' . $name . '</a> '. $delimiter . ' ';
+
+		if ( is_category() ) {
+						global $wp_query;
+						$cat_obj = $wp_query->get_queried_object();
+						$thisCat = $cat_obj->term_id;
+						$thisCat = get_category($thisCat);
+						$parentCat = get_category($thisCat->parent);
+						if ($thisCat->parent != 0) echo(get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' '));
+						echo $currentBefore;
+						single_cat_title();
+						echo $currentAfter;
+
+		} elseif ( is_single() ) {
+				$cat = get_the_category(); $cat = $cat[0];
+				echo get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
+				echo $currentBefore;
+				the_title();
+				echo $currentAfter;
+
+		} elseif ( is_page() && !$post->post_parent ) {
+				echo $currentBefore;
+				the_title();
+				echo $currentAfter;
+
+		} elseif ( is_page() && $post->post_parent ) {
+				$parent_id  = $post->post_parent;
+				$breadcrumbs = array();
+				while ($parent_id) {
+						$page = get_page($parent_id);
+						$breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
+						$parent_id  = $page->post_parent;
+				}
+				$breadcrumbs = array_reverse($breadcrumbs);
+				foreach ($breadcrumbs as $crumb) echo $crumb . ' ' . $delimiter . ' ';
+				echo $currentBefore;
+				the_title();
+				echo $currentAfter;
+
+		} elseif ( is_search() ) {
+				echo $currentBefore . 'Search for ' . get_search_query() . $currentAfter;
+
+		} elseif ( is_tag() ) {
+				echo $currentBefore;
+				single_tag_title();
+				echo $currentAfter;
+
+		} elseif ( is_author() ) {
+					global $author;
+				$userdata = get_userdata($author);
+				echo $currentBefore. $userdata->display_name . $currentAfter;
+
+		} elseif ( is_404() ) {
+				echo $currentBefore . 'Error 404' . $currentAfter;
+		}
+
+		if ( get_query_var('paged') )
+				echo $currentBefore . __('Page') . ' ' . get_query_var('paged') . $currentAfter;
+	}
 }
 
 /**

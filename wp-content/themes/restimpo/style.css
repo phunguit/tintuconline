@@ -249,7 +249,7 @@ body {
 .container,
 #footer {  
   margin: 0 auto;
-  max-width: 1240px;
+  max-width: 1270px;
   position: relative;
   width: 100%; 
 }
@@ -259,7 +259,9 @@ body {
 #main-content {
   float: right;
   margin: 40px 0 20px;
-  width: 960px;         
+  width: 960px;
+  border: solid 2px #07ad87;
+  padding: 8px;
 }
 .page-template-template-full-width-php .container #main-content,
 .page-template-template-landing-page-php .container #main-content,
@@ -318,7 +320,7 @@ body {
 .content-headline {
   height: auto;
   margin: 0 auto;
-  max-width: 980px;
+  max-width: 1260px;
   position: relative;
   width: 100%;                
 }
@@ -441,7 +443,7 @@ body {
   float: left;
   height: auto;
   position: relative;
-  width: 87%;
+  width: 100%;
   z-index: 100;                        
 }
 #wrapper .header-description-wrapper {
@@ -723,17 +725,17 @@ way to fit your requirements. */
   display: none;
 } 
 
-.nav-menu ul {
+.header-description ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.nav-menu ul li {
+.header-description ul li {
   float: left;
 }
 
-.nav-menu ul li a {
+.header-description ul li a {
   display: block;
   color: #07ad87;
   text-align: center;
@@ -742,8 +744,21 @@ way to fit your requirements. */
   font-size: 20px;
 }
 
-.nav-menu ul li a:hover {
+.header-description ul li a:hover {
   background-color: #111111;
+}
+
+.breadcrumb {
+  background: #f2f2f2;
+}
+
+.breadcrumb > span:before {
+  content: "/";
+  padding: 0 5px;
+}
+
+.breadcrumb a {
+  text-decoration-line: none;
 }
 
 /* main content
@@ -806,6 +821,7 @@ way to fit your requirements. */
   -webkit-transition: color 1s;
   transition: color 1s;             
 }
+
 .post-info span { 
   display: inline-block;
   height: 16px;
@@ -1018,7 +1034,9 @@ iframe[id^="oauth2relay"] {
   float: left;
   font-size: 12px;
   margin-bottom: 30px;  
-  width: 100%;               
+  width: 100%;
+  border: solid 2px #07ad87;
+  padding: 8px  
 }
 .sidebar-widget .sidebar-headline {
   border-bottom: 1px solid #e3e3e3;
@@ -1086,7 +1104,8 @@ iframe[id^="oauth2relay"] {
   margin-bottom: 2px;          
 }
 #footer a {
-  color: #acecde;          
+  color: #acecde;
+  text-decoration-line: none;
 }
 .footer-widget-area {
   float: left;
@@ -1094,7 +1113,7 @@ iframe[id^="oauth2relay"] {
   margin-right: 40px;
   padding: 40px 0 10px;
   position: relative; 
-  width: 300px; 
+  width: 395px; 
   z-index: 50;                
 }
 #footer .footer-widget-area-3 {
